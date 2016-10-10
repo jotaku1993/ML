@@ -1,4 +1,5 @@
 from numpy import *
+from loadData import csv2matrix
 import operator
 
 import matplotlib
@@ -54,13 +55,6 @@ def file2matrix(filename, featureNum):
 		idx += 1
 	return returnMat, classLabelVet
 
-#Read the data from csv
-def csv2matrix(xFilename, yFilename):
-	#Split the csv file with ","
-	returnMat = genfromtxt(xFilename, delimiter=',')
-	classLabelVet = genfromtxt(yFilename, delimiter=',')
-	return returnMat, classLabelVet
-
 
 if __name__ == '__main__':
 	#g,l = createDataSet()
@@ -85,15 +79,15 @@ if __name__ == '__main__':
 	'''
 	########################
 	#Test with hand write 4 & 9, get accuracy of 97%
-	#absolute_path = "/Users/jotaku/Downloads/BAYESIAN/hw1_data_csv/"
-	xTrain,lTrain = csv2matrix('Xtrain.csv', 'ytrain.csv')
-	xTest, lTest = csv2matrix('Xtest.csv', 'ytest.csv')
+	relative_path = "dataset/"
+	xTrain, lTrain = csv2matrix(relative_path+'Xtrain.csv', relative_path+'ytrain.csv')
+	xTest, lTest = csv2matrix(relative_path+'Xtest.csv', relative_path+'ytest.csv')
 	total = len(lTest)
 	cnt = 0
 	for i in range(total):
 		if classify0(xTest[i], xTrain, lTrain, 7)==lTest[i]:
 			cnt += 1
-	print cnt, total
+	print cnt, total, float(1.0*cnt/total)
 
 
 
